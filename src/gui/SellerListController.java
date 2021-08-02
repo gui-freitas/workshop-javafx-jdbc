@@ -45,13 +45,13 @@ public class SellerListController implements Initializable, DataChangeListener {
 
 	@FXML
 	private TableColumn<Seller, String> tableColumnName;
-	
+
 	@FXML
 	private TableColumn<Seller, String> tableColumnEmail;
-	
+
 	@FXML
 	private TableColumn<Seller, Date> tableColumnBirthDate;
-	
+
 	@FXML
 	private TableColumn<Seller, Double> tableColumnBaseSalary;
 
@@ -147,8 +147,7 @@ public class SellerListController implements Initializable, DataChangeListener {
 					return;
 				}
 				setGraphic(button);
-				button.setOnAction(
-						event -> createDialogForm(obj, "/gui/SellerForm.fxml", Utils.currentStage(event)));
+				button.setOnAction(event -> createDialogForm(obj, "/gui/SellerForm.fxml", Utils.currentStage(event)));
 			}
 		});
 	}
@@ -173,7 +172,7 @@ public class SellerListController implements Initializable, DataChangeListener {
 
 	private void removeEntity(Seller seller) {
 		Optional<ButtonType> result = Alerts.showConfirmation("Confirmation", "Are you sure to delete?");
-		
+
 		if (result.get() == ButtonType.OK) {
 			if (sellerService == null) {
 				throw new IllegalStateException("Service was null");
@@ -181,8 +180,7 @@ public class SellerListController implements Initializable, DataChangeListener {
 			try {
 				sellerService.remove(seller);
 				updateTableView();
-			}
-			catch (DbIntegrityException e) {
+			} catch (DbIntegrityException e) {
 				Alerts.showAlert("Error removing object", null, e.getMessage(), AlertType.ERROR);
 			}
 		}
